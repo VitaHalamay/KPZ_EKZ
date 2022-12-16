@@ -10,8 +10,9 @@ namespace KPZ_EKZ.Services.Interfaces
     {
         Task<List<CarDto>> GetCars();
         Task<CarDto> GetCar(int carId);
-        Task<CarDto> CreateCar(CarCreateUpdateDto car);
+        Task CreateCar(CarCreateUpdateDto car);
         Task UpdateCar(int carId, CarCreateUpdateDto car);
-        Task DeleteCar(int carId);
+        Task SellCar(int carId, string code);
+
     }
 }

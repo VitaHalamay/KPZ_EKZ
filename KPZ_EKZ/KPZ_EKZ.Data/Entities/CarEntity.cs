@@ -17,5 +17,6 @@ namespace KPZ_EKZ.Data.Entities
         [StringLength(100)]
         public string Make { get; set; }
         public virtual ICollection<CarItemEntity> Items { get; set; }
+
     }
 }

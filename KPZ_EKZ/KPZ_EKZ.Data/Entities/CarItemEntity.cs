@@ -19,7 +19,6 @@ namespace KPZ_EKZ.Data.Entities
         public double? SellerCommission { get; set; }
         public int CarId { get; set; }
         public virtual CarEntity Car { get; set; }
-
-        
+        public virtual ICollection<SellingEntity> Sellings { get; set; }
     }
 }

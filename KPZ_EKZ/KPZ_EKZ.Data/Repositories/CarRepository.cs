@@ -29,14 +29,14 @@ namespace KPZ_EKZ.Data.Repositories
                     Description = ci.Description,
                     InitialPrice = ci.InitialPrice,
                     ShopCommission = ci.ShopCommission,
-                    SellerCommission = ci.SellerCommission
-
+                    SellerCommission = ci.SellerCommission,
+                    Sold = ci.Sellings.Any()
                 })
                 .ToListAsync();
 
             return cars;
         }
-        public async Task AddOrUpdate(short year, string make, string model, string licensePlate, string description, double price)
+        public async Task AddOrUpdate(short year, string make, string model, string licensePlate, string description, double? price)
         {
             var carEntity = await Context.Cars
                 .FirstOrDefaultAsync(c => c.Year == year && c.Make == make && c.Model == model);
@@ -78,6 +78,40 @@ namespace KPZ_EKZ.Data.Repositories
                 SetUpdated(carItemEntity);
                 Context.CarItems.Update(carItemEntity);
             }
+        }
+
+        public async Task<CarDto> GetById(int id)
+        {
+            var car = await Context.CarItems
+                   .Include(ci => ci.Car)
+                   .Where(ci => ci.CarId == id)
+                   .Select(ci => new CarDto
+                   {
+                       Id = ci.Id,
+                       Year = ci.Car.Year,
+                       Model = ci.Car.Model,
+                       Make = ci.Car.Make,
+                       LicensePlate = ci.LicensePlate,
+                       Description = ci.Description,
+                       InitialPrice = ci.InitialPrice,
+                       ShopCommission = ci.ShopCommission,
+                       SellerCommission = ci.SellerCommission,
+                       Sold = ci.Sellings.Any()
+                   })
+                   .FirstOrDefaultAsync();
+
+            return car;
+        }
+
+        public async Task SellCar(int carItemId, int sellerId)
+        {
+            var sellingEntity = new SellingEntity
+            {
+                CarItemId = carItemId,
+                SellerId = sellerId
+            };
+            SetCreated(sellingEntity);
+            await Context.Sellings.AddAsync(sellingEntity);
         }
     }
 }

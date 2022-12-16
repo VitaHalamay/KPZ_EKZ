@@ -44,9 +44,12 @@ namespace KPZ_EKZ
             // Repositories:
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ISellerRepository, SellerRepository>();
+            services.AddTransient<IReportRepository, ReportRepository>();
 
             // Services: 
             services.AddTransient<ICarService, CarService>();
+            services.AddTransient<IReportService, ReportService>();
+
 
         }
 
@@ -65,6 +68,8 @@ namespace KPZ_EKZ
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

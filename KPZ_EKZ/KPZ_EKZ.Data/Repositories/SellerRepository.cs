@@ -1,4 +1,5 @@
-﻿using KPZ_EKZ.Data.Entities;
+﻿using KPZ_EKZ.Data.DTOs.Seller;
+using KPZ_EKZ.Data.Entities;
 using KPZ_EKZ.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,6 +39,24 @@ namespace KPZ_EKZ.Data.Repositories
                 SetUpdated(sellerEntity);
                 Context.Sellers.Update(sellerEntity);
             }
+        }
+
+        public async Task<SellerDto> GetByAccessCode(string code)
+        {
+            var seller = await Context.Sellers
+                .Where(s => s.AccessCode == code)
+                .Select(s => new SellerDto
+                {
+                    Id = s.Id,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    EmailAddress = s.EmailAddress,
+                    PhoneNumber = s.PhoneNumber,
+                    AccessCode = s.AccessCode
+                })
+                .SingleOrDefaultAsync();
+
+            return seller;
         }
     }
 }

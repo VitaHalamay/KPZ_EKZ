@@ -9,7 +9,9 @@ namespace KPZ_EKZ.Data.Repositories.Interfaces
 {
     public interface ICarRepository : IRepository
     {
-        Task AddOrUpdate(short year, string make, string model, string licensePlate, string description, double price);
+        Task AddOrUpdate(short year, string make, string model, string licensePlate, string description, double? price);
         Task<List<CarDto>> GetAll();
+        Task<CarDto> GetById(int id);
+        Task SellCar(int carItemId, int sellerId);
     }
 }

@@ -11,19 +11,17 @@ namespace KPZ_EKZ.Services
     public class CarService : ICarService
     {
         private ICarRepository _carRepository;
+        private ISellerRepository _sellerRepository;
 
-        public CarService(ICarRepository carRepository)
+        public CarService(ICarRepository carRepository, ISellerRepository sellerRepository)
         {
             _carRepository = carRepository;
+            _sellerRepository = sellerRepository;
         }
-        public Task<CarDto> CreateCar(CarCreateUpdateDto car)
+        public async Task CreateCar(CarCreateUpdateDto car)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteCar(int carId)
-        {
-            throw new NotImplementedException();
+            await _carRepository.AddOrUpdate(car.Year, car.Make, car.Model, car.LicensePlate, car.Description, car.InitialPrice);
+            await _carRepository.SaveChangesAsync();
         }
 
         public Task<CarDto> GetCar(int carId)
@@ -36,9 +34,17 @@ namespace KPZ_EKZ.Services
             return await _carRepository.GetAll();
         }
 
-        public Task UpdateCar(int carId, CarCreateUpdateDto car)
+        public async Task UpdateCar(int carId, CarCreateUpdateDto car)
         {
-            throw new NotImplementedException();
+            await _carRepository.AddOrUpdate(car.Year, car.Make, car.Model, car.LicensePlate, car.Description, car.InitialPrice);
+            await _carRepository.SaveChangesAsync();
+        }
+        public async Task SellCar(int carId, string code)
+        {
+            var car = await _carRepository.GetById(carId);
+            var seller = await _sellerRepository.GetByAccessCode(code);
+            await _carRepository.SellCar(car.Id, seller.Id);
+            await _carRepository.SaveChangesAsync();
         }
     }
 }

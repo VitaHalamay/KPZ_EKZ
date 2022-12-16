@@ -36,9 +36,9 @@ namespace KPZ_EKZ.Controllers
         /// <param name="car"></param>
         /// <returns></returns>
         [HttpPost("car")]
-        public async Task<CarDto> CreateCar([FromBody] CarCreateUpdateDto car)
+        public async Task CreateCar([FromBody] CarCreateUpdateDto car)
         {
-            return await _carService.CreateCar(car);
+            await _carService.CreateCar(car);
         }
 
         /// <summary>
@@ -65,16 +65,13 @@ namespace KPZ_EKZ.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// Delete Car
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("car/{id}")]
-        public async Task DeleteCar(int id)
+       
+        [HttpPost("car/{id}/sell/{code}")]
+        public async Task SellCar(int id, string code)
         {
-            await _carService.DeleteCar(id);
+            await _carService.SellCar(id, code);
         }
+
     }
 
 }

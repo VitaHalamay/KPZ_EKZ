@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace KPZ_EKZ.Data.DTOs.Car
 {
-    public class CarCreateUpdateDto
+    public class CarCreateUpdateDto 
     {
+        public short Year { get; set; }
+        public string Model { get; set; }
+        public string Make { get; set; }
+        public string LicensePlate { get; set; }
+        public string Description { get; set; }
+        public double? InitialPrice { get; set; }
+
     }
 }
