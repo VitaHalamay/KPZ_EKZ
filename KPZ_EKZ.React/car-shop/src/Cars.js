@@ -342,15 +342,15 @@ import React, {
         <table className='table table-striped'>
           <thead>
             <tr>
+            <th>year</th>
+              <th>model</th>
+              <th>make</th>
               <th>firstName</th>
               <th>lastName</th>
               <th>soldAt</th>
               <th>shopCommission</th>
               <th>sellerCommission</th>
               <th>totalPrice</th>
-              <th>year</th>
-              <th>model</th>
-              <th>make</th>
               <th>licensePlate</th>
               <th>initialPrice</th>
             </tr>
@@ -359,15 +359,15 @@ import React, {
           <tbody>
             {reportCars.map(c =>
               <tr key={c.id}>
+                <td>{c.year}</td>
+                <td>{c.model}</td>
+                <td>{c.make}</td>
                 <td>{c.firstName}</td>
                 <td>{c.lastName}</td>
                 <td>{c.soldAt}</td>
                 <td>{c.shopCommission}</td>
                 <td>{c.sellerCommission}</td>
                 <td>{c.totalPrice}</td>
-                <td>{c.year}</td>
-                <td>{c.model}</td>
-                <td>{c.make}</td>
                 <td>{c.licensePlate}</td>
                 <td>{c.initialPrice}</td>
               </tr>)}
