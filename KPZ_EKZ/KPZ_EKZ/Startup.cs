@@ -1,4 +1,7 @@
 using KPZ_EKZ.Data;
+using KPZ_EKZ.Data.Repositories;
+using KPZ_EKZ.Data.Repositories.Interfaces;
+using KPZ_EKZ.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +38,9 @@ namespace KPZ_EKZ
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "KPZ_EKZ", Version = "v1" });
             });
+
+            // Repositories:
+            services.AddTransient<ICarRepository, CarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +52,7 @@ namespace KPZ_EKZ
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "KPZ_EKZ v1"));
             }
-
+            app.Seed();
             app.UseHttpsRedirection();
 
             app.UseRouting();

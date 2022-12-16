@@ -11,5 +11,8 @@ namespace KPZ_EKZ.Data.Entities
     {
         [Key]
         public int Id { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime? Updated { get; set; }
+
     }
 }
