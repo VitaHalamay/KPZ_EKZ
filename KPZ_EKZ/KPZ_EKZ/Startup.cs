@@ -2,6 +2,8 @@ using KPZ_EKZ.Data;
 using KPZ_EKZ.Data.Repositories;
 using KPZ_EKZ.Data.Repositories.Interfaces;
 using KPZ_EKZ.Extensions;
+using KPZ_EKZ.Services;
+using KPZ_EKZ.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +43,10 @@ namespace KPZ_EKZ
 
             // Repositories:
             services.AddTransient<ICarRepository, CarRepository>();
+
+            // Services: 
+            services.AddTransient<ICarService, CarService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
