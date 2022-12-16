@@ -8,7 +8,7 @@ namespace KPZ_EKZ.Data
         public DbSet<CarEntity> Cars { get; set; }
         public DbSet<CarItemEntity> CarItems { get; set; }
         public DbSet<SellerEntity> Sellers { get; set; }
-        public DbSet<SellingEntity> SellingEntities { get; set; }
+        public DbSet<SellingEntity> Sellings { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
