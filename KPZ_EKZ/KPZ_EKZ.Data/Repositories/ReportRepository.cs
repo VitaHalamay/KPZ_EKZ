@@ -32,7 +32,7 @@ namespace KPZ_EKZ.Data.Repositories
                     SellerCommission = ci.SellerCommission,
                     FirstName = ci.Sellings.First().Seller.FirstName,
                     LastName = ci.Sellings.First().Seller.LastName,
-                    SoldAt = ci.Sellings.First().Created,
+                    SoldAt = ci.Sellings.First().Created.ToShortDateString(),
                     Sold = true
                 })
                 .ToListAsync();

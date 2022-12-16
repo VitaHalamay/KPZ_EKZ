@@ -10,6 +10,6 @@ namespace KPZ_EKZ.Data.DTOs.Car
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime SoldAt { get; set; }
+        public string SoldAt { get; set; }
     }
 }
