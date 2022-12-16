@@ -1,8 +1,16 @@
-import React,{useEffect, useState} from 'react';
-import { Variables } from './Variables';
-import { Modal, Button } from "react-bootstrap";
-
-export default function Cars(){
+import React, {
+    useEffect,
+    useState
+  } from 'react';
+  import {
+    Variables
+  } from './Variables';
+  import {
+    Modal,
+    Button
+  } from "react-bootstrap";
+  
+  export default function Cars() {
     const [cars, setCars] = useState([]);
     const [modalTitle, setModalTitle] = useState("");
     const [id, setId] = useState(0);
@@ -19,151 +27,152 @@ export default function Cars(){
     const [sellShow, setSellShow] = useState(false);
     const [code, setCode] = useState("");
     const [sold, setSold] = useState(false);
-
-
-    const changeCode =(e)=>{
-        setCode(e.target.value);
-        }
-    const changeYear =(e)=>{
-        setYear(e.target.value);
-        }
-    const changeModel =(e)=>{
-            setModel(e.target.value);
-        }
-    const changeMake =(e)=>{
-        setMake(e.target.value);
-        }
-    const changeLicensePlate =(e)=>{
-        setLicensePlate(e.target.value);
-            }
-    const changeDescription =(e)=>{
-        setDescription(e.target.value);
-            }
-    const changeInitialPrice =(e)=>{
-            setInitialPrice(e.target.value);
-            }
-    
-
+  
+  
+    const changeCode = (e) => {
+      setCode(e.target.value);
+    }
+    const changeYear = (e) => {
+      setYear(e.target.value);
+    }
+    const changeModel = (e) => {
+      setModel(e.target.value);
+    }
+    const changeMake = (e) => {
+      setMake(e.target.value);
+    }
+    const changeLicensePlate = (e) => {
+      setLicensePlate(e.target.value);
+    }
+    const changeDescription = (e) => {
+      setDescription(e.target.value);
+    }
+    const changeInitialPrice = (e) => {
+      setInitialPrice(e.target.value);
+    }
+  
+  
     let isFirstRun = false;
-
-    const  showModal =(e) => {
-        setShow(true);
-      };
-
-      const handleClose = (e) => {
-        setShow(false);
-        setSellShow(false);
-      };
-
-      const refreshList = () =>{
-        fetch(Variables.API_URL + 'car')
-        .then(response=>response.json())
-        .then(data=>{
-           setCars(data);
+  
+    const showModal = (e) => {
+      setShow(true);
+    };
+  
+    const handleClose = (e) => {
+      setShow(false);
+      setSellShow(false);
+    };
+  
+    const refreshList = () => {
+      fetch(Variables.API_URL + 'car')
+        .then(response => response.json())
+        .then(data => {
+          setCars(data);
         });
     }
-    useEffect (()=>{
-        console.log('test');
-        if(isFirstRun === false){
-            refreshList();
-            console.log('test if');
-            isFirstRun = true;
-        }
-    },[])
-    const sellClick = (e) =>{
-        setId(e.id);
-        setSellShow(true);
-        }
-
-        const sellAction = (e) =>{
-            fetch(Variables.API_URL + 'car/' + id +'/sell/' +code,{
-                method:'POST',
-                headers:{
-                  //  'Accept':'application/json',
-                    'Content-Type':'application/json'
-                }
-            
-            })
-            .then(res=>res.json())
-            .then((result)=>{
-                refreshList();
-                setSellShow(false);
-            },(error)=>{
-                refreshList();
-                setSellShow(false);
-            })
+    useEffect(() => {
+      console.log('test');
+      if (isFirstRun === false) {
+        refreshList();
+        console.log('test if');
+        isFirstRun = true;
+      }
+    }, [])
+    const sellClick = (e) => {
+      setId(e.id);
+      setSellShow(true);
+    }
+  
+    const sellAction = (e) => {
+      fetch(Variables.API_URL + 'car/' + id + '/sell/' + code, {
+          method: 'POST',
+          headers: {
+            //  'Accept':'application/json',
+            'Content-Type': 'application/json'
           }
-    const addClick = (e) =>{
-        setModalTitle("Add car");
-        setYear(0);
-        setModel("");
-        setMake("");
-        setLicensePlate("");
-        setDescription("");
-        setInitialPrice(0);
-        setShow(true);
-        }
-        const editClick = (c)=>{
-          setModalTitle("Edit car");
-          setYear(c.year);
-          setModel(c.model);
-          setMake(c.make);
-          setLicensePlate(c.licensePlate);
-          setDescription(c.description);
-          setInitialPrice(c.initialPrice);
-          setShow(true);}
-
-          const createClick =()=>{
-            fetch(Variables.API_URL + 'car',{
-                method:'POST',
-                headers:{
-                    //'Accept':'application/json',
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    year: year,
-                    model: model,
-                    make: make,
-                    licensePlate: licensePlate,
-                    description: description,
-                    initialPrice: initialPrice
-                })
-            })
-            .then(res=>res.json())
-            .then((result)=>{
-               refreshList();
-               setShow(false);
-            },(error)=>{
-                refreshList();
-                setShow(false);
-            })
-        }
-
-        const updateClick = () =>{
-            fetch(Variables.API_URL + 'car' ,{
-                method:'PUT',
-                headers:{
-                  //  'Accept':'application/json',
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    year: year,
-                    model: model,
-                    make: make,
-                    licensePlate: licensePlate,
-                    description: description,
-                    initialPrice: initialPrice
-                })
-            })
-            .then(res=>res.json())
-            .then((result)=>{
-                refreshList();
-                setShow(false);
-            },(error)=>{
-                refreshList();
-                setShow(false);
-            })
-          }
+  
+        })
+        .then(res => res.json())
+        .then((result) => {
+          refreshList();
+          setSellShow(false);
+        }, (error) => {
+          refreshList();
+          setSellShow(false);
+        })
+    }
+    const addClick = (e) => {
+      setModalTitle("Add car");
+      setYear(0);
+      setModel("");
+      setMake("");
+      setLicensePlate("");
+      setDescription("");
+      setInitialPrice(0);
+      setShow(true);
+    }
+    const editClick = (c) => {
+      setModalTitle("Edit car");
+      setYear(c.year);
+      setModel(c.model);
+      setMake(c.make);
+      setLicensePlate(c.licensePlate);
+      setDescription(c.description);
+      setInitialPrice(c.initialPrice);
+      setShow(true);
+    }
+  
+    const createClick = () => {
+      fetch(Variables.API_URL + 'car', {
+          method: 'POST',
+          headers: {
+            //'Accept':'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            year: year,
+            model: model,
+            make: make,
+            licensePlate: licensePlate,
+            description: description,
+            initialPrice: initialPrice
+          })
+        })
+        .then(res => res.json())
+        .then((result) => {
+          refreshList();
+          setShow(false);
+        }, (error) => {
+          refreshList();
+          setShow(false);
+        })
+    }
+  
+    const updateClick = () => {
+      fetch(Variables.API_URL + 'car', {
+          method: 'PUT',
+          headers: {
+            //  'Accept':'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            year: year,
+            model: model,
+            make: make,
+            licensePlate: licensePlate,
+            description: description,
+            initialPrice: initialPrice
+          })
+        })
+        .then(res => res.json())
+        .then((result) => {
+          refreshList();
+          setShow(false);
+        }, (error) => {
+          refreshList();
+          setShow(false);
+        })
+    }
 
     return (
         <div>
