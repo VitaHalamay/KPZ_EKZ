@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/KPZ_EKZ/v16
+/.vs
+/KPZ_EKZ/.vs/KPZ_EKZ/v16
+/KPZ_EKZ/KPZ_EKZ/obj
+/KPZ_EKZ/KPZ_EKZ/bin/Debug/net5.0
