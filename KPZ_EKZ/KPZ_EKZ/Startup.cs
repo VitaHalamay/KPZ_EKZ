@@ -43,6 +43,7 @@ namespace KPZ_EKZ
 
             // Repositories:
             services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<ISellerRepository, SellerRepository>();
 
             // Services: 
             services.AddTransient<ICarService, CarService>();

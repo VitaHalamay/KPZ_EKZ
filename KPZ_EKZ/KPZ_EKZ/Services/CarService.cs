@@ -1,4 +1,5 @@
 ﻿using KPZ_EKZ.Data.DTOs.Car;
+using KPZ_EKZ.Data.Repositories.Interfaces;
 using KPZ_EKZ.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,12 @@ namespace KPZ_EKZ.Services
 {
     public class CarService : ICarService
     {
+        private ICarRepository _carRepository;
+
+        public CarService(ICarRepository carRepository)
+        {
+            _carRepository = carRepository;
+        }
         public Task<CarDto> CreateCar(CarCreateUpdateDto car)
         {
             throw new NotImplementedException();
@@ -24,9 +31,9 @@ namespace KPZ_EKZ.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<CarDto>> GetCars()
+        public async Task<List<CarDto>> GetCars()
         {
-            throw new NotImplementedException();
+            return await _carRepository.GetAll();
         }
 
         public Task UpdateCar(int carId, CarCreateUpdateDto car)
